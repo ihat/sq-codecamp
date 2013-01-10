@@ -2,9 +2,9 @@
 
 # Load data
 ?read.csv
+??read
 payments = read.csv("~/Desktop/code_camp_payments.csv")
 items = read.csv("~/Desktop/code_camp_items.csv")
-?data.frame
 
 # fix time data types
 payments$created_at   = as.POSIXct( payments$created_at, tz='UTC')
@@ -12,7 +12,7 @@ items$order_created_at = as.POSIXct( items$order_created_at, tz='UTC')
 
 # Add date columns
 payments$date = as.Date( payments$created_at, tz='UTC')
-items$date     = as.Date( items$order_created_at, tz='UTC')
+items$date    = as.Date( items$order_created_at, tz='UTC')
 
 # Quick summaries
 qs <- function( df){
@@ -99,6 +99,5 @@ items.summary = aggregate(rep(1, length(items$id) ), by=list(items$item_name),su
 head(items.summary)
 names( items.summary ) <- c('item_name', 'count')
 sort.items <- items.summary[order(-items.summary$count) , ]
-?head
 head( sort.items , n=15)
 
